@@ -1,7 +1,7 @@
 package br.edu.ifsp.encurtador.model.dao;
 
-public class LinkDaoDatabase {
+public class LinkDaoFactory {
 	public LinkDao factory() {
-		return new LinkDaoDatabase();
+		return new LinkDaoFactory();
 	}
 }
