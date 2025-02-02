@@ -35,6 +35,10 @@ public class Link {
 		return linkOriginal;
 	}
 	
+	public Map<Access,Integer> getAcessos(){
+		return new HashMap<Access,Integer>(acessos);
+	}
+	
 	public void setLinkEncurtado(String linkEncurtado) {
 		this.linkEncurtado = linkEncurtado;
 	}
