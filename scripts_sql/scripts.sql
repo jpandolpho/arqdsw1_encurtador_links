@@ -19,5 +19,5 @@ CREATE TABLE tb_link (
 CREATE TABLE tb_acess (
 	link VARCHAR(12),
 	endereco_ip VARCHAR(15),
-	FOREIGN KEY (link) REFERENCES tb_link(curto)
+	FOREIGN KEY (link) REFERENCES tb_link(curto) ON DELETE CASCADE
 );
