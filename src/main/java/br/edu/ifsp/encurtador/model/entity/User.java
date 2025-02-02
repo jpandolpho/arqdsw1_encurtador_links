@@ -2,6 +2,7 @@ package br.edu.ifsp.encurtador.model.entity;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -28,6 +29,18 @@ public class User {
 	
 	public String getSenha() {
 		return senha;
+	}
+	
+	public List<Link> getLinks(){
+		return new ArrayList<Link>(links);
+	}
+	
+	public void clearList() {
+		links.clear();
+	}
+	
+	public void addLink(Link link) {
+		links.add(link);
 	}
 	
 	public static boolean authenticate(User fromSystem, String login, String senha) {

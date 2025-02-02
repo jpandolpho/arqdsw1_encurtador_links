@@ -1,7 +1,8 @@
 package br.edu.ifsp.encurtador.model.dao;
 
-import java.util.List;
+import java.sql.SQLException;
 
+import br.edu.ifsp.encurtador.model.dao.connection.DatabaseConnection;
 import br.edu.ifsp.encurtador.model.entity.Link;
 import br.edu.ifsp.encurtador.model.entity.User;
 
@@ -14,26 +15,82 @@ public class LinkDaoDatabase implements LinkDao {
 	
 	@Override
 	public boolean create(User user, Link link) {
-		// TODO Auto-generated method stub
-		return false;
+		int rows = 0;
+		if(link!=null) {
+			try(var connection = DatabaseConnection.getConnection();
+				var statement = connection.prepareStatement(INSERT)){
+				
+				statement.setString(1, link.getLinkEncurtado());
+				statement.setString(2, link.getLinkOriginal());
+				statement.setString(3, user.getLogin());
+				
+				rows = statement.executeUpdate();
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return rows > 0;
 	}
 
 	@Override
 	public boolean update(Link updatedLink, String oldShort) {
-		// TODO Auto-generated method stub
-		return false;
+		int rows = 0;
+		if(updatedLink!=null && !oldShort.isEmpty()) {
+			try(var connection = DatabaseConnection.getConnection();
+				var statement = connection.prepareStatement(UPDATE)){
+				
+				statement.setString(1, updatedLink.getLinkEncurtado());
+				statement.setString(2, updatedLink.getLinkOriginal());
+				statement.setString(3, oldShort);
+				
+				rows = statement.executeUpdate();
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return rows > 0;
 	}
 
 	@Override
 	public boolean delete(Link link) {
-		// TODO Auto-generated method stub
+		if(link!=null) {
+			int rows = -1;
+			try(var connection = DatabaseConnection.getConnection();
+				var statement = connection.prepareStatement(DELETE)){
+					
+				statement.setString(1, link.getLinkEncurtado());
+					
+				rows = statement.executeUpdate();
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+			return rows > 0;
+		}
 		return false;
 	}
 
 	@Override
-	public List<Link> retrieve(User user) {
-		// TODO Auto-generated method stub
-		return null;
+	public void retrieve(User user) {
+		user.clearList();
+		try(var connection = DatabaseConnection.getConnection();
+			var statement = connection.prepareStatement(SELECT_ALL)){
+					
+			statement.setString(1, user.getLogin());
+			var result = statement.executeQuery();
+			
+			while(result.next()) {
+				var link = new Link();
+				link.setLinkEncurtado(result.getString("curto"));
+				link.setLinkOriginal(result.getString("original"));
+				
+				AccessDao dao = new AccessDaoFactory().factory();
+				dao.retrieve(link);
+				
+				user.addLink(link);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

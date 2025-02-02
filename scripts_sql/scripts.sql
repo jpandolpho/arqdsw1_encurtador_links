@@ -16,7 +16,7 @@ CREATE TABLE tb_link (
 	FOREIGN KEY (user_login) REFERENCES tb_user(login)
 );
 
-CREATE TABLE tb_acess (
+CREATE TABLE tb_access (
 	link VARCHAR(12),
 	endereco_ip VARCHAR(15),
 	FOREIGN KEY (link) REFERENCES tb_link(curto) ON DELETE CASCADE
