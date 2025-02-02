@@ -1,5 +1,8 @@
 package br.edu.ifsp.encurtador.model.dao;
 
+import java.sql.SQLException;
+
+import br.edu.ifsp.encurtador.model.dao.connection.DatabaseConnection;
 import br.edu.ifsp.encurtador.model.entity.User;
 
 public class UserDaoDatabase implements UserDao {
@@ -9,14 +12,38 @@ public class UserDaoDatabase implements UserDao {
 	
 	@Override
 	public boolean insert(User user) {
-		// TODO Auto-generated method stub
-		return false;
+		int rows = 0;
+		if(user!=null) {
+			try(var connection = DatabaseConnection.getConnection();
+				var statement = connection.prepareStatement(INSERT)){
+				
+				statement.setString(1, user.getLogin());
+				statement.setString(2, user.getSenha());
+				
+				rows = statement.executeUpdate();
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return rows > 0;
 	}
 
 	@Override
 	public User findByLogin(String login) {
-		// TODO Auto-generated method stub
-		return null;
+		User user = null;
+		try(var connection = DatabaseConnection.getConnection();
+			var statement = connection.prepareStatement(SELECT_BY_LOGIN)){
+			
+			statement.setString(1, login);
+			var resultSet = statement.executeQuery();
+			if(resultSet.next()) {
+				user = new User(resultSet.getString("login"),resultSet.getString("email"),true);
+				//talvez colocar a lista de links do usuário aqui já?
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return user;
 	}
 
 }
