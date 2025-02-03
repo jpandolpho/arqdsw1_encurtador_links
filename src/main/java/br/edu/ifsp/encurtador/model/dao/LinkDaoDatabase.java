@@ -22,7 +22,11 @@ public class LinkDaoDatabase implements LinkDao {
 				
 				statement.setString(1, link.getLinkEncurtado());
 				statement.setString(2, link.getLinkOriginal());
-				statement.setString(3, user.getLogin());
+				if(user!=null) {
+					statement.setString(3, user.getLogin());
+				}else {
+					statement.setString(3, null);
+				}
 				
 				rows = statement.executeUpdate();
 			}catch(SQLException e) {
