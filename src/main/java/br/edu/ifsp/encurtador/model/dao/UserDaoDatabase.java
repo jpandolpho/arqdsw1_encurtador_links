@@ -37,7 +37,7 @@ public class UserDaoDatabase implements UserDao {
 			statement.setString(1, login);
 			var resultSet = statement.executeQuery();
 			if(resultSet.next()) {
-				user = new User(resultSet.getString("login"),resultSet.getString("email"),true);
+				user = new User(resultSet.getString("login"),resultSet.getString("senha"),true);
 				
 				LinkDao dao = new LinkDaoFactory().factory();
 				dao.retrieve(user);
