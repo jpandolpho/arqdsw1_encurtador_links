@@ -12,4 +12,6 @@ public interface LinkDao {
 	boolean delete(Link link);
 	
 	void retrieve(User user);
+	
+	Link retrieve(String original);
 }
