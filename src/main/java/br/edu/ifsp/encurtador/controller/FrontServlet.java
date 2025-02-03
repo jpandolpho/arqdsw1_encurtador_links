@@ -33,6 +33,14 @@ public class FrontServlet extends HttpServlet {
 			command = new HomeCommand();
 		}else if("encurtar".equals(action)) {
 			command = new EncurtarCommand();
+		}else if("register".equals(action)) {
+			command = new FormCadastroCommand();
+		}else if("formLogin".equals(action)) {
+			command = new FormLoginCommand();
+		}else if("saveUser".equals(action)) {
+			command = new SaveUserCommand();
+		}else if("login".equals(action)) {
+			command = new LoginCommand();
 		}
 		
 		String view = command.execute(request, response);
