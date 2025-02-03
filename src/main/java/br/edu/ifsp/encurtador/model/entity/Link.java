@@ -10,7 +10,6 @@ public class Link {
 	private Map<Access,Integer> acessos;
 	
 	private static int tamLink = 5;
-	private static String rootURL = "http://localhost:8080/arqdsw1_encurtador_links/curto/";
 	
 	public static void atualizarTamanho() {
 		if(tamLink<12) {
@@ -69,6 +68,6 @@ public class Link {
 		for (int i = 0; i < tamLink; i++) {
 			result.append(pool.charAt(rand.nextInt(pool.length())));
 		}
-		return rootURL + result.toString();
+		return result.toString();
 	}
 }

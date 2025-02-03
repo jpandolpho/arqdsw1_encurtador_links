@@ -9,7 +9,7 @@
 	<%
 		String link = (String) request.getAttribute("link");
 		if (link != null ) {%>
-			<h1><%=link %></h1>
+			<a href="<%="http://localhost:8080/arqdsw1_encurtador_links/curto/"+link %>">link</a>
 		<%}%>
 	<form action="front.do?action=encurtar" method="post">
 		<input type="text" name="textLink"
