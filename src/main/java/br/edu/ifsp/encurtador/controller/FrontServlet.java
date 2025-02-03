@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import br.edu.ifsp.encurtador.controller.command.Command;
 import br.edu.ifsp.encurtador.controller.command.EncurtarCommand;
+import br.edu.ifsp.encurtador.controller.command.FormUserCommand;
 import br.edu.ifsp.encurtador.controller.command.HomeCommand;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -33,15 +34,13 @@ public class FrontServlet extends HttpServlet {
 			command = new HomeCommand();
 		}else if("encurtar".equals(action)) {
 			command = new EncurtarCommand();
-		}else if("register".equals(action)) {
-			command = new FormCadastroCommand();
-		}else if("formLogin".equals(action)) {
-			command = new FormLoginCommand();
-		}else if("saveUser".equals(action)) {
+		}else if("formUser".equals(action)) {
+			command = new FormUserCommand();
+		}/*else if("saveUser".equals(action)) {
 			command = new SaveUserCommand();
 		}else if("login".equals(action)) {
 			command = new LoginCommand();
-		}
+		}*/
 		
 		String view = command.execute(request, response);
 		var dispatcher = request.getRequestDispatcher(view);

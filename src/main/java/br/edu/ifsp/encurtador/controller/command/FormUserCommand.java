@@ -6,12 +6,15 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class FormCadastroCommand implements Command {
+public class FormUserCommand implements Command {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		return "/formCadastro.jsp";
+		boolean login = Boolean.parseBoolean(request.getParameter("login"));
+		request.setAttribute("login", login);
+		
+		return "/formUser.jsp";
 	}
 
 }
