@@ -15,15 +15,16 @@ public class EncurtarCommand implements Command {
 	public String execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		var textLink = request.getParameter("textLink");
-		Link link = new Link(textLink);
 		
 		LinkDao dao = new LinkDaoFactory().factory();
+		Link link = dao.retrieve(textLink);
 		
-		boolean saved = dao.create(null, link);
-		
-		if(saved) {
-			System.out.println("salvou");
+		if(link==null) {
+			link = new Link(textLink);
+			boolean saved = dao.create(null, link);
 		}
+		
+		System.out.println(link.getLinkEncurtado());
 		
 		return "front.do?action=home";
 	}
