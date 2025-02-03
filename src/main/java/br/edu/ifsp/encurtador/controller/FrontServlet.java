@@ -6,6 +6,8 @@ import br.edu.ifsp.encurtador.controller.command.Command;
 import br.edu.ifsp.encurtador.controller.command.EncurtarCommand;
 import br.edu.ifsp.encurtador.controller.command.FormUserCommand;
 import br.edu.ifsp.encurtador.controller.command.HomeCommand;
+import br.edu.ifsp.encurtador.controller.command.LoginCommand;
+import br.edu.ifsp.encurtador.controller.command.SaveUserCommand;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -22,7 +24,6 @@ public class FrontServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		processRequest(request,response);
 	}
 	
@@ -36,11 +37,11 @@ public class FrontServlet extends HttpServlet {
 			command = new EncurtarCommand();
 		}else if("formUser".equals(action)) {
 			command = new FormUserCommand();
-		}/*else if("saveUser".equals(action)) {
+		}else if("saveUser".equals(action)) {
 			command = new SaveUserCommand();
 		}else if("login".equals(action)) {
 			command = new LoginCommand();
-		}*/
+		}
 		
 		String view = command.execute(request, response);
 		var dispatcher = request.getRequestDispatcher(view);
