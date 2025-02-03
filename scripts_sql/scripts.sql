@@ -10,14 +10,14 @@ CREATE TABLE tb_user (
 );
 
 CREATE TABLE tb_link (
-	curto VARCHAR(12) PRIMARY KEY,
+	curto VARCHAR(65) PRIMARY KEY,
 	original VARCHAR(256) NOT NULL,
 	user_login VARCHAR(20),
 	FOREIGN KEY (user_login) REFERENCES tb_user(login)
 );
 
 CREATE TABLE tb_access (
-	link VARCHAR(12),
+	link VARCHAR(65),
 	endereco_ip VARCHAR(15),
 	FOREIGN KEY (link) REFERENCES tb_link(curto) ON DELETE CASCADE
 );

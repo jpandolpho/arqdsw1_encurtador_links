@@ -24,7 +24,7 @@ public class CurtoServlet extends HttpServlet {
 	}
 
 	private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String curto = request.getRequestURL().toString().split("/")[5];
+		String curto = request.getRequestURL().toString();
 		
 		var dao = new LinkDaoFactory().factory();
 		String original = dao.retrieve_original(curto);
