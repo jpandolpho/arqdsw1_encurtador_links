@@ -12,8 +12,8 @@ public class LinkDaoDatabase implements LinkDao {
 	private static final String UPDATE = "UPDATE tb_link SET curto = ?, original = ? WHERE curto = ?";
 	private static final String DELETE = "DELETE FROM tb_link WHERE curto = ?";
 	private static final String SELECT_ALL = "SELECT * FROM tb_link WHERE user_login = ?";
-	private static final String SELECT_BY_LINK_NO_USER = "SELECT * FROM tb_link WHERE original = ? AND user_login IS NULL";
-	private static final String SELECT_ORIGINAL = "SELECT original FROM tb_link WHERE curto = ?";
+	private static final String SELECT_BY_ORIGINAL_NO_USER = "SELECT * FROM tb_link WHERE original = ? AND user_login IS NULL";
+	private static final String SELECT_BY_CURTO = "SELECT * FROM tb_link WHERE curto = ?";
 	
 	@Override
 	public boolean create(User user, Link link) {
@@ -103,7 +103,7 @@ public class LinkDaoDatabase implements LinkDao {
 	public Link retrieve(String original) {
 		Link link = null;
 		try(var connection = DatabaseConnection.getConnection();
-			var statement = connection.prepareStatement(SELECT_BY_LINK_NO_USER)){
+			var statement = connection.prepareStatement(SELECT_BY_ORIGINAL_NO_USER)){
 			
 			statement.setString(1, original);
 			var resultSet = statement.executeQuery();
@@ -120,7 +120,7 @@ public class LinkDaoDatabase implements LinkDao {
 	public String retrieve_original(String curto) {
 		String original = null;
 		try(var connection = DatabaseConnection.getConnection();
-			var statement = connection.prepareStatement(SELECT_ORIGINAL)){
+			var statement = connection.prepareStatement(SELECT_BY_CURTO)){
 			
 			statement.setString(1, curto);
 			var resultSet = statement.executeQuery();
@@ -131,6 +131,23 @@ public class LinkDaoDatabase implements LinkDao {
 			e.printStackTrace();
 		}
 		return original;
+	}
+
+	@Override
+	public boolean hasUser(String curto) {
+		boolean hasUser = false;
+		try(var connection = DatabaseConnection.getConnection();
+			var statement = connection.prepareStatement(SELECT_BY_CURTO)){
+			
+			statement.setString(1, curto);
+			var resultSet = statement.executeQuery();
+			if(resultSet.next()) {
+				hasUser = resultSet.getString("user_login").equals("null");
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return hasUser;
 	}
 
 }

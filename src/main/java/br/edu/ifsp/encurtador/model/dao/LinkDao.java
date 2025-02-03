@@ -16,4 +16,6 @@ public interface LinkDao {
 	Link retrieve(String original);
 	
 	String retrieve_original(String curto);
+	
+	boolean hasUser(String curto);
 }
