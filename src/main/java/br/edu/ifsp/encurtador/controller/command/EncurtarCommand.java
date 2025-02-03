@@ -24,7 +24,7 @@ public class EncurtarCommand implements Command {
 			boolean saved = dao.create(null, link);
 		}
 		
-		System.out.println(link.getLinkEncurtado());
+		request.setAttribute("link", link.getLinkEncurtado());
 		
 		return "front.do?action=home";
 	}
