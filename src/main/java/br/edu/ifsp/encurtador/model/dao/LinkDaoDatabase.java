@@ -142,7 +142,8 @@ public class LinkDaoDatabase implements LinkDao {
 			statement.setString(1, curto);
 			var resultSet = statement.executeQuery();
 			if(resultSet.next()) {
-				hasUser = resultSet.getString("user_login").equals("null");
+				String user = resultSet.getString("user_login"); 
+				hasUser = (user!=null);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
