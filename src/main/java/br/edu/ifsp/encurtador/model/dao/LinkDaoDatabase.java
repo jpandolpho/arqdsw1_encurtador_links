@@ -13,6 +13,7 @@ public class LinkDaoDatabase implements LinkDao {
 	private static final String DELETE = "DELETE FROM tb_link WHERE curto = ?";
 	private static final String SELECT_ALL = "SELECT * FROM tb_link WHERE user_login = ?";
 	private static final String SELECT_BY_LINK_NO_USER = "SELECT * FROM tb_link WHERE original = ? AND user_login IS NULL";
+	private static final String SELECT_ORIGINAL = "SELECT original FROM tb_link WHERE curto = ?";
 	
 	@Override
 	public boolean create(User user, Link link) {
@@ -113,6 +114,23 @@ public class LinkDaoDatabase implements LinkDao {
 			e.printStackTrace();
 		}
 		return link;
+	}
+
+	@Override
+	public String retrieve_original(String curto) {
+		String original = null;
+		try(var connection = DatabaseConnection.getConnection();
+			var statement = connection.prepareStatement(SELECT_ORIGINAL)){
+			
+			statement.setString(1, curto);
+			var resultSet = statement.executeQuery();
+			if(resultSet.next()) {
+				original = resultSet.getString("original");
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return original;
 	}
 
 }
