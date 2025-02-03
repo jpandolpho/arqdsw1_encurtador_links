@@ -9,4 +9,14 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>FrontServlet</display-name>
+    <servlet-name>FrontServlet</servlet-name>
+    <servlet-class>br.edu.ifsp.encurtador.controller.FrontServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FrontServlet</servlet-name>
+    <url-pattern>/FrontServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
