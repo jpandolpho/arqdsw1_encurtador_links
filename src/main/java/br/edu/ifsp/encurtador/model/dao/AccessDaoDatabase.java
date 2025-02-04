@@ -6,7 +6,7 @@ import br.edu.ifsp.encurtador.model.dao.connection.DatabaseConnection;
 import br.edu.ifsp.encurtador.model.entity.Access;
 import br.edu.ifsp.encurtador.model.entity.Link;
 
-public class AccessDaoDatabase implements AccessDao {
+class AccessDaoDatabase implements AccessDao {
 
 	private static final String INSERT = "INSERT INTO tb_access(link,endereco_ip) VALUES (?,?)";
 	private static final String SELECT_ALL = "SELECT endereco_ip, COUNT(endereco_ip) AS contagem FROM tb_access WHERE link = ? GROUP BY endereco_ip";

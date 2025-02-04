@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import br.edu.ifsp.encurtador.model.dao.connection.DatabaseConnection;
 import br.edu.ifsp.encurtador.model.entity.User;
 
-public class UserDaoDatabase implements UserDao {
+class UserDaoDatabase implements UserDao {
 
 	private static final String INSERT = "INSERT INTO tb_user(login,senha) VALUES (?,?)";
 	private static final String SELECT_BY_LOGIN = "SELECT * FROM tb_user WHERE login = ?";

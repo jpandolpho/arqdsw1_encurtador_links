@@ -6,7 +6,7 @@ import br.edu.ifsp.encurtador.model.dao.connection.DatabaseConnection;
 import br.edu.ifsp.encurtador.model.entity.Link;
 import br.edu.ifsp.encurtador.model.entity.User;
 
-public class LinkDaoDatabase implements LinkDao {
+class LinkDaoDatabase implements LinkDao {
 	
 	private static final String INSERT = "INSERT INTO tb_link(curto,original,user_login) VALUES (?,?,?)";
 	private static final String UPDATE = "UPDATE tb_link SET curto = ?, original = ? WHERE curto = ?";
