@@ -26,6 +26,7 @@ public class CurtoServlet extends HttpServlet {
 	}
 
 	private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//mover isso pra um command urgente
 		String curto = request.getRequestURL().toString().split("/")[5];
 		
 		var linkDao = new LinkDaoFactory().factory();
