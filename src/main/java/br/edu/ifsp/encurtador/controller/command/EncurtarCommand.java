@@ -19,12 +19,23 @@ public class EncurtarCommand implements Command {
 		LinkDao dao = new LinkDaoFactory().factory();
 		Link link = dao.retrieve(textLink);
 		
+		boolean retrieved = false;
+		boolean created = false;
+		
 		if(link==null) {
 			link = new Link(textLink);
-			boolean saved = dao.create(null, link);
+			created = dao.create(null, link);
+		}else {
+			retrieved = true;
 		}
 		
-		request.setAttribute("link", link.getLinkEncurtado());
+		if(created || retrieved) {
+			request.setAttribute("link", link.getLinkEncurtado());
+		}
+		
+		if(!created && !retrieved) {
+			request.setAttribute("msg", "Erro ao criar link curto.");
+		}
 		
 		return "front.do?action=home";
 	}
