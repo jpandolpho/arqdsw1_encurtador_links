@@ -29,7 +29,9 @@ public class LoginCommand implements Command {
 			session.setMaxInactiveInterval(24*60*60);
 			view = "user.do?action=logged";
 		}else {
-			view = "front.do?action=home";
+			request.setAttribute("msg", "Erro ao fazer login.");
+			
+			view = "front.do?action=formUser&login=true";
 		}
 		return view;
 	}

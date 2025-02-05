@@ -6,6 +6,11 @@
 <body>
 	<% boolean login = (Boolean) request.getAttribute("login"); %>
 	<jsp:include page="/includes/navbar.jsp"/>
+	<%
+		String msg = (String) request.getAttribute("msg");
+		if (msg != null ) {%>
+			<h1><%=msg %></h1>
+	<%}%>
 	<hr>
 	<%if(!login){ %>
 	<form action="front.do?action=saveUser" method="post">

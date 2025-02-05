@@ -21,12 +21,12 @@ public class SaveUserCommand implements Command {
 		var saved = dao.insert(user);
 		
 		if(saved) {
-			System.out.println("salvou usuário");
+			request.setAttribute("msg", "Usuário salvo com sucesso.");
 		}else {
-			System.out.println("não salvou");
+			request.setAttribute("msg", "Erro ao criar usuário.");
 		}
 		
-		return "front.do?action=home";
+		return "front.do?action=formUser&login=false";
 	}
 
 }
