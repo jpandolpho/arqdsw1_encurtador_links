@@ -7,7 +7,7 @@ import java.util.Random;
 public class Link {
 	private String linkEncurtado;
 	private String linkOriginal;
-	private Map<Access,Integer> acessos;
+	private Map<Access,Integer> acessos = new HashMap<>();
 	
 	private static int tamLink = 5;
 	

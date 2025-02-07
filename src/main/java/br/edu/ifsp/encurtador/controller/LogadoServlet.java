@@ -11,7 +11,6 @@ import jakarta.servlet.http.HttpSession;
 import br.edu.ifsp.encurtador.controller.command.Command;
 import br.edu.ifsp.encurtador.controller.command.ListLinksCommand;
 import br.edu.ifsp.encurtador.controller.command.HomeLogadoCommand;
-import br.edu.ifsp.encurtador.controller.command.ViewStatsCommand;
 import br.edu.ifsp.encurtador.controller.command.LogoutCommand;
 import br.edu.ifsp.encurtador.controller.command.EncurtarLogadoCommand;
 

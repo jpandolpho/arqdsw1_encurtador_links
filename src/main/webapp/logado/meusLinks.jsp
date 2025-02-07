@@ -1,48 +1,57 @@
-<%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="br.edu.ifsp.encurtador.model.entity.Link" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="java.util.List" %>
+<%@ page import="br.edu.ifsp.encurtador.model.entity.Link" %>
 <%@ page import="br.edu.ifsp.encurtador.model.entity.User" %>
+<jsp:include page="includes/navbar.jsp" />
 
 <%
     User user = (User) session.getAttribute("user");
     if (user == null) {
-        response.sendRedirect("../index.jsp");
+        response.sendRedirect("login.jsp");
         return;
     }
+
+    List<Link> links = (List<Link>) request.getAttribute("links");
 %>
 
-<!DOCTYPE html>
-<html>
-<jsp:include page="/includes/head.html"/>
-<body>
-    <hr>
-
-    <h2>Meus Links Curtos</h2>
+<div class="container">
+    <h2>Meus Links</h2>
     
-    <%
-        List<Link> userLinks = (List<Link>) request.getAttribute("userLinks");
-        if (userLinks == null || userLinks.isEmpty()) {
-    %>
-        <p>Você ainda não tem links encurtados.</p>
-    <%
-        } else {
-    %>
-        <ul>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Original</th>
+                <th>Encurtado</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
             <%
-                for (Link link : userLinks) {
+                if (links != null && !links.isEmpty()) {
+                    for (Link link : links) {
             %>
-                <li><a href="<%= "http://localhost:8080/arqdsw1_encurtador_links/curto/" + link.getLinkEncurtado() %>" target="_blank">curto/<%= link.getLinkEncurtado() %></a></li>
+                        <tr>
+                            <td><a href="<%= link.getLinkOriginal() %>" target="_blank"><%= link.getLinkOriginal() %></a></td>
+                            <td><a href="r/<%= link.getLinkEncurtado() %>" target="_blank"><%= request.getServerName() %>/r/<%= link.getLinkEncurtado() %></a></td>
+                            <td>
+                                <form action="FrontServlet" method="post" style="display:inline;">
+                                    <input type="hidden" name="command" value="DeleteLinkCommand">
+                                    <input type="hidden" name="curto" value="<%= link.getLinkEncurtado() %>">
+                                    <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+                                </form>
+                                <a href="FrontServlet?command=EditLinkCommand&curto=<%= link.getLinkEncurtado() %>" class="btn btn-warning btn-sm">Editar</a>
+                            </td>
+                        </tr>
+            <%
+                    }
+                } else {
+            %>
+                    <tr>
+                        <td colspan="3" class="text-center">Nenhum link encontrado.</td>
+                    </tr>
             <%
                 }
             %>
-        </ul>
-    <%
-        }
-    %>
-
-    <ul>
-        <li><a href="logado?command=Home">Voltar para a página inicial</a></li>
-        <li><a href="logado?command=Logout">Sair</a></li>
-    </ul>
-</body>
-</html>
+        </tbody>
+    </table>
+</div>
