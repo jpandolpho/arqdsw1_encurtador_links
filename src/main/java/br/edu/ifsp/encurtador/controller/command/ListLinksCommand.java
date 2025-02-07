@@ -1,16 +1,14 @@
 package br.edu.ifsp.encurtador.controller.command;
 
-import java.io.IOException;
 import java.util.List;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 import br.edu.ifsp.encurtador.model.dao.LinkDao;
 import br.edu.ifsp.encurtador.model.dao.LinkDaoFactory;
 import br.edu.ifsp.encurtador.model.entity.Link;
 import br.edu.ifsp.encurtador.model.entity.User;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 public class ListLinksCommand implements Command {
 
@@ -20,7 +18,7 @@ public class ListLinksCommand implements Command {
 
         User user = (User) session.getAttribute("user");
         new LinkDaoFactory();
-		LinkDao linkDao = LinkDaoFactory.factory();
+		LinkDao linkDao = new LinkDaoFactory().factory();
         
         List<Link> links = linkDao.retrieveLinksByUser(user);
         session.setAttribute("links", links);

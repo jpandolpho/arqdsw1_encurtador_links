@@ -61,13 +61,13 @@ class LinkDaoDatabase implements LinkDao {
 	}
 
 	@Override
-	public boolean delete(Link link) {
-		if(link!=null) {
+	public boolean delete(String curto) {
+		if(!curto.isEmpty()) {
 			int rows = -1;
 			try(var connection = DatabaseConnection.getConnection();
 				var statement = connection.prepareStatement(DELETE)){
 					
-				statement.setString(1, link.getLinkEncurtado());
+				statement.setString(1, curto);
 					
 				rows = statement.executeUpdate();
 			}catch(SQLException e) {

@@ -6,10 +6,7 @@
 <jsp:include page="includes/navbar.jsp" />
 
 <%
-    User user = (User) session.getAttribute("user");
-
-    List<Link> links = (List<Link>) request.getAttribute("links");
-    List<Access> accesses = (List<Access>) request.getAttribute("accesses");
+	List<Link> links = (List<Link>) request.getAttribute("links");
 %>
 
 <div class="container">
@@ -82,7 +79,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <%
-                                            if (accesses != null && !accesses.isEmpty()) {
+                                            if (!link.getAcessos().isEmpty()) {
                                         %>
                                                 <table class="table">
                                                     <thead>
@@ -93,11 +90,11 @@
                                                     </thead>
                                                     <tbody>
                                                         <%
-                                                            for (Access access : accesses) {
+                                                            for (Access access : link.getAcessos().keySet()) {
                                                         %>
                                                                 <tr>
                                                                     <td><%= access.getIpAddress() %></td>
-                                                                    <td><%= access.getCount() %></td>
+                                                                    <td><%= link.getAcessos().get(access) %></td>
                                                                 </tr>
                                                         <%
                                                             }

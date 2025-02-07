@@ -11,7 +11,7 @@ public interface LinkDao {
 	
 	boolean update(Link updatedLink, String oldShort);
 	
-	boolean delete(Link link);
+	boolean delete(String curto);
 	
 	void retrieve(User user);
 	

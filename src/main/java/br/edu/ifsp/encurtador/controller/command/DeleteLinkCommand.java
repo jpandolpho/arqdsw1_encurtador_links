@@ -1,6 +1,5 @@
 package br.edu.ifsp.encurtador.controller.command;
 
-import br.edu.ifsp.encurtador.model.entity.Link;
 import br.edu.ifsp.encurtador.model.dao.LinkDao;
 import br.edu.ifsp.encurtador.model.dao.LinkDaoFactory;
 import br.edu.ifsp.encurtador.model.entity.User;
@@ -12,17 +11,15 @@ public class DeleteLinkCommand implements Command {
 	 @Override
 	    public String execute(HttpServletRequest request, HttpServletResponse response) {
 		 	HttpSession session = request.getSession(false);
-	        User user = (User) request.getSession().getAttribute("user");
+	        User user = (User) session.getAttribute("user");
 
 	        String curto = request.getParameter("curto");
 
 	        if (curto != null && !curto.isEmpty()) {
-	            LinkDao linkDao = LinkDaoFactory.factory();
-	            Link link = new Link(curto, "");
+	            LinkDao linkDao = new LinkDaoFactory().factory();
 	            
 	            if (user.getLinks().stream().anyMatch(l -> l.getLinkEncurtado().equals(curto))) {
-	            	 LinkDao linkdao = LinkDaoFactory.factory();
-	                 boolean success = linkdao.delete(link);
+	            	 boolean success = linkDao.delete(curto);
 
 	                 if (success) {
 	                     linkDao.retrieve(user);
@@ -37,6 +34,6 @@ public class DeleteLinkCommand implements Command {
 	         } else {
 	             request.setAttribute("message", "Link inválido.");
 	         }
-	        return "/logado/home.jsp"; 
+	        return "logado.do?command=ListLinks"; 
 	    }
 }

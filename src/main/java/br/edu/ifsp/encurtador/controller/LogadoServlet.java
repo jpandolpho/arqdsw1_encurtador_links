@@ -1,21 +1,20 @@
 package br.edu.ifsp.encurtador.controller;
 
 import java.io.IOException;
-import br.edu.ifsp.encurtador.model.entity.User;
+
+import br.edu.ifsp.encurtador.controller.command.Command;
+import br.edu.ifsp.encurtador.controller.command.DeleteLinkCommand;
+import br.edu.ifsp.encurtador.controller.command.EditLinkCommand;
+import br.edu.ifsp.encurtador.controller.command.EncurtarLogadoCommand;
+import br.edu.ifsp.encurtador.controller.command.HomeLogadoCommand;
+import br.edu.ifsp.encurtador.controller.command.ListLinksCommand;
+import br.edu.ifsp.encurtador.controller.command.LogoutCommand;
+import br.edu.ifsp.encurtador.controller.command.ShowAccessCommand;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import br.edu.ifsp.encurtador.controller.command.Command;
-import br.edu.ifsp.encurtador.controller.command.DeleteLinkCommand;
-import br.edu.ifsp.encurtador.controller.command.EditLinkCommand;
-import br.edu.ifsp.encurtador.controller.command.ListLinksCommand;
-import br.edu.ifsp.encurtador.controller.command.HomeLogadoCommand;
-import br.edu.ifsp.encurtador.controller.command.LogoutCommand;
-import br.edu.ifsp.encurtador.controller.command.ShowAccessCommand;
-import br.edu.ifsp.encurtador.controller.command.EncurtarLogadoCommand;
 
 @WebServlet("/logado.do")
 public class LogadoServlet extends HttpServlet {

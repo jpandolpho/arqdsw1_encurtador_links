@@ -25,7 +25,7 @@ public class EditLinkCommand implements Command {
 
         Link updatedLink = new Link(newShort, newOriginal);
 
-        LinkDao dao = LinkDaoFactory.factory();
+        LinkDao dao = new LinkDaoFactory().factory();
         boolean success = dao.update(updatedLink, oldShort);
 
         if (success) {

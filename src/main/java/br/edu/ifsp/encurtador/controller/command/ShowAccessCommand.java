@@ -23,32 +23,26 @@ public class ShowAccessCommand implements Command {
     public String execute(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
         
-        HttpSession session = request.getSession(false);
-
-        if (session == null || session.getAttribute("user") == null) {
-            return "login.jsp"; 
-        }
-
-        String curto = request.getParameter("curto");
-
-        if (curto != null && !curto.isEmpty()) {
-            LinkDao linkDao = LinkDaoFactory.factory();
-            Link link = new Link(curto, ""); 
-
-            AccessDao accessDao = AccessDaoFactory.factory();
-            accessDao.retrieve(link);
-
-            Map<Access, Integer> accessMap = link.getAcessos();
-            List<Access> accesses = new ArrayList<>();
-
-            for (Map.Entry<Access, Integer> entry : accessMap.entrySet()) {
-                Access access = entry.getKey();
-                access.setCount(entry.getValue()); 
-                accesses.add(access);
-            }
-
-            request.setAttribute("accesses", accesses);
-        }
+//        String curto = request.getParameter("curto");
+//
+//        if (curto != null && !curto.isEmpty()) {
+//            LinkDao linkDao = new LinkDaoFactory().factory();
+//            Link link = new Link(curto, ""); 
+//
+//            AccessDao accessDao = new AccessDaoFactory().factory();
+//            accessDao.retrieve(link);
+//
+//            Map<Access, Integer> accessMap = link.getAcessos();
+//            List<Access> accesses = new ArrayList<>();
+//
+//            for (Map.Entry<Access, Integer> entry : accessMap.entrySet()) {
+//                Access access = entry.getKey();
+//                access.setCount(entry.getValue()); 
+//                accesses.add(access);
+//            }
+//
+//            request.setAttribute("accesses", accesses);
+//        }
 
         return "/logado/meusLinks.jsp";
     }
