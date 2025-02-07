@@ -32,14 +32,14 @@
             %>
                         <tr>
                             <td><a href="<%= link.getLinkOriginal() %>" target="_blank"><%= link.getLinkOriginal() %></a></td>
-                            <td><a href="r/<%= link.getLinkEncurtado() %>" target="_blank"><%= request.getServerName() %>/r/<%= link.getLinkEncurtado() %></a></td>
-                            <td>
-                                <form action="FrontServlet" method="post" style="display:inline;">
-                                    <input type="hidden" name="command" value="DeleteLinkCommand">
+                            <td><a href="curto/<%= link.getLinkEncurtado() %>" target="_blank"><%= request.getServerName() %>/curto/<%= link.getLinkEncurtado() %></a></td>
+                             <td>
+                                <form action="LogadoServlet" method="post" style="display:inline;" onsubmit="return confirm('Tem certeza que deseja excluir este link?');">
+                                    <input type="hidden" name="command" value="DeleteLink">
                                     <input type="hidden" name="curto" value="<%= link.getLinkEncurtado() %>">
                                     <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
                                 </form>
-                                <a href="FrontServlet?command=EditLinkCommand&curto=<%= link.getLinkEncurtado() %>" class="btn btn-warning btn-sm">Editar</a>
+                                <a href="LogadoServlet?command=EditLinkCommand&curto=<%= link.getLinkEncurtado() %>" class="btn btn-warning btn-sm">Editar</a>
                             </td>
                         </tr>
             <%
