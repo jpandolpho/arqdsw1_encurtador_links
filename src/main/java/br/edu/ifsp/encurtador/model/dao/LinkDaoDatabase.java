@@ -87,9 +87,7 @@ class LinkDaoDatabase implements LinkDao {
 			var result = statement.executeQuery();
 			
 			while(result.next()) {
-				var link = new Link();
-				link.setLinkEncurtado(result.getString("curto"));
-				link.setLinkOriginal(result.getString("original"));
+				var link = new Link(result.getString("curto"),result.getString("original"));
 				
 				AccessDao dao = new AccessDaoFactory().factory();
 				dao.retrieve(link);

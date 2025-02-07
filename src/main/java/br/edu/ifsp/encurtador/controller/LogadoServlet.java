@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import br.edu.ifsp.encurtador.controller.command.Command;
 import br.edu.ifsp.encurtador.controller.command.ListLinksCommand;
-import br.edu.ifsp.encurtador.controller.command.LoggedHomeCommand;
+import br.edu.ifsp.encurtador.controller.command.HomeLogadoCommand;
 import br.edu.ifsp.encurtador.controller.command.ViewStatsCommand;
 import br.edu.ifsp.encurtador.controller.command.LogoutCommand;
 import br.edu.ifsp.encurtador.controller.command.EncurtarLogadoCommand;
@@ -43,7 +43,7 @@ public class LogadoServlet extends HttpServlet {
         } else if ("EncurtarLink".equals(action)) {
             command = new EncurtarLogadoCommand(); 
         } else if ("Home".equals(action)) {
-        	command = new LoggedHomeCommand();
+        	command = new HomeLogadoCommand();
         }
         
         String view = command.execute(request, response);

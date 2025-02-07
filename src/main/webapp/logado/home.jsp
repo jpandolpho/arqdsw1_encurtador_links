@@ -10,6 +10,7 @@
     <h2>Criar Novo Link Curto</h2>
     <form action="logado.do?command=EncurtarLink" method="post">
         <input type="text" name="textLink" placeholder="Digite o link" required="required">
+        <input type="text" name="textCurto" placeholder="Personalize seu link curto, se quiser" maxlength="12">
         <button type="submit">Encurtar</button>
     </form>
 

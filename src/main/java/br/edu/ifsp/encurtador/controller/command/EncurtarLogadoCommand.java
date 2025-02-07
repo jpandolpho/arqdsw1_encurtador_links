@@ -14,20 +14,16 @@ public class EncurtarLogadoCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    	//verifica usuario
-        User user = (User) request.getSession().getAttribute("user");
-        if (user == null) {
-            response.sendRedirect("../index.jsp");
-            return null;
-        }
-
-
+    	User user = (User) request.getSession().getAttribute("user");
+        
         String textLink = request.getParameter("textLink");
+        String textCurto = request.getParameter("textCurto");
 
-        if (textLink == null || textLink.isEmpty()) {
-            request.setAttribute("msg", "O link não pode estar vazio.");
-            return "home.jsp"; //
-        }
+        //acho que não precisa dessa verificação
+//        if (textLink == null || textLink.isEmpty()) {
+//            request.setAttribute("msg", "O link não pode estar vazio.");
+//            return "home.jsp"; //
+//        }
 
         LinkDao dao = new LinkDaoFactory().factory();
         Link link = dao.retrieve(textLink);
@@ -35,7 +31,11 @@ public class EncurtarLogadoCommand implements Command {
         boolean created = false;
 
         if (link == null) {
-            link = new Link(textLink);
+        	if(textCurto == null || textCurto.isEmpty()) {
+        		link = new Link(textLink);
+        	}else {
+        		link = new Link(textCurto,textLink);
+        	}
             created = dao.create(user, link);
         } else {
             created = true;
@@ -47,6 +47,6 @@ public class EncurtarLogadoCommand implements Command {
         } else {
             request.setAttribute("msg", "Erro ao criar o link curto.");
         }
-        return "home.jsp"; 
+        return "logado.do?command=Home"; 
     }
 }

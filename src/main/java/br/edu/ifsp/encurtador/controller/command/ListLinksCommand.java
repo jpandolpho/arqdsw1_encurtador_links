@@ -14,6 +14,7 @@ public class ListLinksCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    	//não precisa fazer verificação da sessão, eu criei o filtro agora
         User user = (User) request.getSession().getAttribute("user");
         
         if (user == null) {
@@ -26,7 +27,8 @@ public class ListLinksCommand implements Command {
         List<Link> userLinks = linkDao.retrieveLinksByUser(user);
 
         request.setAttribute("userLinks", userLinks);
-
+        
+        //retorna o caminho da página pra qual vc quer mandar o usuário, por exemplo "/logado/meusLinks.jsp"
         try {
             request.getRequestDispatcher("/meusLinks.jsp").forward(request, response);
         } catch (Exception e) {
