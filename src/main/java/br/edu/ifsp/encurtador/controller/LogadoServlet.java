@@ -14,6 +14,7 @@ import br.edu.ifsp.encurtador.controller.command.EditLinkCommand;
 import br.edu.ifsp.encurtador.controller.command.ListLinksCommand;
 import br.edu.ifsp.encurtador.controller.command.HomeLogadoCommand;
 import br.edu.ifsp.encurtador.controller.command.LogoutCommand;
+import br.edu.ifsp.encurtador.controller.command.ShowAccessCommand;
 import br.edu.ifsp.encurtador.controller.command.EncurtarLogadoCommand;
 
 @WebServlet("/logado.do")
@@ -49,6 +50,8 @@ public class LogadoServlet extends HttpServlet {
             command = new DeleteLinkCommand();
         } else if ("EditLink".equals(action)) {
             command = new EditLinkCommand();
+        } else if ("ShowAccess".equals(action)) {
+            command = new ShowAccessCommand();
         }
         
         String view = command.execute(request, response);

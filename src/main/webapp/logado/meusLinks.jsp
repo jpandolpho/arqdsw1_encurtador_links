@@ -2,16 +2,14 @@
 <%@ page import="java.util.List" %>
 <%@ page import="br.edu.ifsp.encurtador.model.entity.Link" %>
 <%@ page import="br.edu.ifsp.encurtador.model.entity.User" %>
+<%@ page import="br.edu.ifsp.encurtador.model.entity.Access" %>
 <jsp:include page="includes/navbar.jsp" />
 
 <%
     User user = (User) session.getAttribute("user");
-    if (user == null) {
-        response.sendRedirect("login.jsp");
-        return;
-    }
 
     List<Link> links = (List<Link>) request.getAttribute("links");
+    List<Access> accesses = (List<Access>) request.getAttribute("accesses");
 %>
 
 <div class="container">
@@ -40,9 +38,14 @@
                                     <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
                                 </form>
                                 <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal<%= link.getLinkEncurtado() %>">Editar</button>
+                                <button type="button" class="btn btn-info btn-sm" 
+                                        onclick="window.location.href='LogadoServlet?command=ShowAccess&curto=<%= link.getLinkEncurtado() %>'">
+                                    ...
+                                </button>
                             </td>
                         </tr>
                         
+                        <!-- Modal Edição -->
                         <div class="modal fade" id="editModal<%= link.getLinkEncurtado() %>" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -68,6 +71,51 @@
                                 </div>
                             </div>
                         </div>
+                        
+                         <!-- Modal de Acessos -->
+                        <div class="modal fade" id="accessModal<%= link.getLinkEncurtado() %>" tabindex="-1" aria-labelledby="accessModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="accessModalLabel">Acessos do Link</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <%
+                                            if (accesses != null && !accesses.isEmpty()) {
+                                        %>
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Endereço IP</th>
+                                                            <th>Contagem de Acessos</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <%
+                                                            for (Access access : accesses) {
+                                                        %>
+                                                                <tr>
+                                                                    <td><%= access.getIpAddress() %></td>
+                                                                    <td><%= access.getCount() %></td>
+                                                                </tr>
+                                                        <%
+                                                            }
+                                                        %>
+                                                    </tbody>
+                                                </table>
+                                        <%
+                                            } else {
+                                        %>
+                                                <p>Nenhum acesso registrado para este link.</p>
+                                        <%
+                                            }
+                                        %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
             <%
                     }
                 } else {
