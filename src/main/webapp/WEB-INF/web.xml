@@ -29,4 +29,14 @@
     <servlet-name>CurtoServlet</servlet-name>
     <url-pattern>/CurtoServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LogadoServlet</display-name>
+    <servlet-name>LogadoServlet</servlet-name>
+    <servlet-class>br.edu.ifsp.encurtador.controller.LogadoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LogadoServlet</servlet-name>
+    <url-pattern>/LogadoServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
