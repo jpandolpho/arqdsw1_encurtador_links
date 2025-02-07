@@ -46,7 +46,6 @@ public class FrontServlet extends HttpServlet {
 		String view = command.execute(request, response);
 		
 		if ("logado".equals(view)) {
-
             response.sendRedirect("LogadoServlet");
         } else {
 		var dispatcher = request.getRequestDispatcher(view);
