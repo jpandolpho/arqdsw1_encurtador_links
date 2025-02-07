@@ -1,6 +1,8 @@
 package br.edu.ifsp.encurtador.model.dao;
 
 import java.sql.SQLException;
+import java.util.List;
+import java.util.ArrayList;
 
 import br.edu.ifsp.encurtador.model.dao.connection.DatabaseConnection;
 import br.edu.ifsp.encurtador.model.entity.Link;
@@ -149,6 +151,32 @@ class LinkDaoDatabase implements LinkDao {
 			e.printStackTrace();
 		}
 		return hasUser;
+	}
+
+	
+	@Override
+	public List<Link> retrieveLinksByUser(User user) {
+	    List<Link> links = new ArrayList<>();
+	    try (var connection = DatabaseConnection.getConnection();
+	         var statement = connection.prepareStatement(SELECT_ALL)) {
+
+	        statement.setString(1, user.getLogin());
+	        var result = statement.executeQuery();
+
+	        while (result.next()) {
+	            Link link = new Link();
+	            link.setLinkEncurtado(result.getString("curto"));
+	            link.setLinkOriginal(result.getString("original"));
+	            
+	            AccessDao dao = new AccessDaoFactory().factory();
+	            dao.retrieve(link);
+
+	            links.add(link);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return links;
 	}
 
 }

@@ -47,7 +47,6 @@ public class EncurtarLogadoCommand implements Command {
         } else {
             request.setAttribute("msg", "Erro ao criar o link curto.");
         }
-
         return "home.jsp"; 
     }
 }

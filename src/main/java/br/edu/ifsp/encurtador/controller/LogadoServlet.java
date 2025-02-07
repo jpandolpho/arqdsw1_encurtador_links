@@ -45,7 +45,7 @@ public class LogadoServlet extends HttpServlet {
         String action = request.getParameter("command");
         
         if ("ListLinks".equals(action)) {
-            //command = new ListLinksCommand(); 
+            command = new ListLinksCommand(); 
         } else if ("ViewStats".equals(action)) {
             //command = new ViewStatsCommand(); 
         } else if ("Logout".equals(action)) {

@@ -1,5 +1,7 @@
 package br.edu.ifsp.encurtador.model.dao;
 
+import java.util.List;
+
 import br.edu.ifsp.encurtador.model.entity.Link;
 import br.edu.ifsp.encurtador.model.entity.User;
 
@@ -18,4 +20,6 @@ public interface LinkDao {
 	String retrieve_original(String curto);
 	
 	boolean hasUser(String curto);
+
+	List<Link> retrieveLinksByUser(User user);
 }
