@@ -1,22 +1,14 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="br.edu.ifsp.encurtador.model.entity.User" %>
-
-<%
-    User user = (User) session.getAttribute("user");
-    if (user == null) {
-        response.sendRedirect("../index.jsp");
-        return;
-    }
-%>
-
 <!DOCTYPE html>
 <html>
 <jsp:include page="/includes/head.html"/>
 <body>
+	<jsp:include page="./includes/navbar.jsp"/>
     <hr>
 
     <h2>Criar Novo Link Curto</h2>
-    <form action="logado?command=EncurtarLink" method="post">
+    <form action="logado.do?command=EncurtarLink" method="post">
         <input type="text" name="textLink" placeholder="Digite o link" required="required">
         <button type="submit">Encurtar</button>
     </form>
@@ -36,11 +28,5 @@
     <%
         }
     %>
-
-    <ul>
-        <li><a href="logado?command=ListLinks">Meus Links Curtos</a></li>
-        <li><a href="logado?command=ViewStats">Estatísticas</a></li>
-        <li><a href="logado?command=Logout">Sair</a></li>
-    </ul>
 </body>
 </html>

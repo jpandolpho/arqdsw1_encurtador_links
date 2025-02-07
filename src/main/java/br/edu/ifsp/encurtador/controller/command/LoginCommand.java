@@ -21,22 +21,18 @@ public class LoginCommand implements Command {
 		
 		var authorized = User.authenticate(user, login, senha);
 		
-		//String view;
+		String view;
 		
 		if(authorized) {
 			var session = request.getSession(true);
 			session.setAttribute("user", user);
 			session.setMaxInactiveInterval(24*60*60);
 			
-			return "logado";
-			//response.sendRedirect("LogadoServlet");
-			//view = "user.do?action=logged";
-			//return null;
+			view = "logado.do?command=Home";
 		}else {
 			request.setAttribute("msg", "Erro ao fazer login.");
-			return "front.do?action=formUser&login=true";
-			//view = "front.do?action=formUser&login=true";
+			view = "front.do?action=formUser&login=true";
 		}
-		//return view;
+		return view;
 	}
 }

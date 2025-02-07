@@ -12,15 +12,11 @@ public class LogoutCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
-        HttpSession session = request.getSession(false);
-        
-        if (session != null) {
-            User user = (User) session.getAttribute("user");
-            if(user != null) {
-            	session.invalidate();
-            }
-        }
-        response.sendRedirect("index.jsp"); 
-        return null;
+    	var session = request.getSession(false);
+		if (session != null) {
+			session.invalidate();
+		}
+		
+		return "front.do?action=home";
     }
 }

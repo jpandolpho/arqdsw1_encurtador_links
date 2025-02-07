@@ -39,4 +39,13 @@
     <servlet-name>LogadoServlet</servlet-name>
     <url-pattern>/LogadoServlet</url-pattern>
   </servlet-mapping>
+  <filter>
+    <display-name>AuthenticationFilter</display-name>
+    <filter-name>AuthenticationFilter</filter-name>
+    <filter-class>br.edu.ifsp.encurtador.controller.AuthenticationFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>AuthenticationFilter</filter-name>
+    <url-pattern>/AuthenticationFilter</url-pattern>
+  </filter-mapping>
 </web-app>
