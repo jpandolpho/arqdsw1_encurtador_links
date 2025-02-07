@@ -30,18 +30,44 @@
                 if (links != null && !links.isEmpty()) {
                     for (Link link : links) {
             %>
-                        <tr>
+                       <tr>
                             <td><a href="<%= link.getLinkOriginal() %>" target="_blank"><%= link.getLinkOriginal() %></a></td>
                             <td><a href="curto/<%= link.getLinkEncurtado() %>" target="_blank"><%= request.getServerName() %>/curto/<%= link.getLinkEncurtado() %></a></td>
-                             <td>
+                            <td>
                                 <form action="LogadoServlet" method="post" style="display:inline;" onsubmit="return confirm('Tem certeza que deseja excluir este link?');">
                                     <input type="hidden" name="command" value="DeleteLink">
                                     <input type="hidden" name="curto" value="<%= link.getLinkEncurtado() %>">
                                     <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
                                 </form>
-                                <a href="LogadoServlet?command=EditLinkCommand&curto=<%= link.getLinkEncurtado() %>" class="btn btn-warning btn-sm">Editar</a>
+                                <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal<%= link.getLinkEncurtado() %>">Editar</button>
                             </td>
                         </tr>
+                        
+                        <div class="modal fade" id="editModal<%= link.getLinkEncurtado() %>" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="editModalLabel">Editar Link</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="LogadoServlet" method="post">
+                                            <input type="hidden" name="command" value="EditLink">
+                                            <input type="hidden" name="curto" value="<%= link.getLinkEncurtado() %>">
+                                            <div class="mb-3">
+                                                <label for="novoCurto" class="form-label">Novo Link Curto</label>
+                                                <input type="text" class="form-control" id="novoCurto" name="novoCurto" value="<%= link.getLinkEncurtado() %>" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="novoOriginal" class="form-label">Novo Link Original</label>
+                                                <input type="text" class="form-control" id="novoOriginal" name="novoOriginal" value="<%= link.getLinkOriginal() %>" required>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Salvar</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
             <%
                     }
                 } else {

@@ -23,6 +23,7 @@ public class ListLinksCommand implements Command {
 		LinkDao linkDao = LinkDaoFactory.factory();
         
         List<Link> links = linkDao.retrieveLinksByUser(user);
+        session.setAttribute("links", links);
         request.setAttribute("links", links);
 
         return "/logado/meusLinks.jsp"; 
