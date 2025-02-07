@@ -16,6 +16,7 @@ class LinkDaoDatabase implements LinkDao {
 	private static final String SELECT_ALL = "SELECT * FROM tb_link WHERE user_login = ?";
 	private static final String SELECT_BY_ORIGINAL_NO_USER = "SELECT * FROM tb_link WHERE original = ? AND user_login IS NULL";
 	private static final String SELECT_BY_CURTO = "SELECT * FROM tb_link WHERE curto = ?";
+	private static final String SELECT_BY_ORIGINAL_HAS_USER = "SELECT * FROM tb_link WHERE original = ? AND user_login = ?";
 	
 	@Override
 	public boolean create(User user, Link link) {
@@ -175,6 +176,24 @@ class LinkDaoDatabase implements LinkDao {
 	        e.printStackTrace();
 	    }
 	    return links;
+	}
+
+	@Override
+	public Link retrieve(String original, User user) {
+		Link link = null;
+		try(var connection = DatabaseConnection.getConnection();
+			var statement = connection.prepareStatement(SELECT_BY_ORIGINAL_HAS_USER)){
+			
+			statement.setString(1, original);
+			statement.setString(2, user.getLogin());
+			var resultSet = statement.executeQuery();
+			if(resultSet.next()) {
+				link = new Link(resultSet.getString("curto"),resultSet.getString("original"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return link;
 	}
 
 }

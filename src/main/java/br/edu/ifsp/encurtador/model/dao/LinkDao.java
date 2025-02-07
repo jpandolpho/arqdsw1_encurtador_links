@@ -22,4 +22,6 @@ public interface LinkDao {
 	boolean hasUser(String curto);
 
 	List<Link> retrieveLinksByUser(User user);
+	
+	Link retrieve(String original, User user);
 }

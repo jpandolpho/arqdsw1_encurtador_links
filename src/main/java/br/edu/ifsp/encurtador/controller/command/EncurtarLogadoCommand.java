@@ -26,7 +26,7 @@ public class EncurtarLogadoCommand implements Command {
 //        }
 
         LinkDao dao = new LinkDaoFactory().factory();
-        Link link = dao.retrieve(textLink);
+        Link link = dao.retrieve(textLink,user);
 
         boolean created = false;
 
