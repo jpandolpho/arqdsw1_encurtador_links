@@ -35,6 +35,6 @@ public class LogadoServlet extends HttpServlet {
         }
 
         request.setAttribute("user", user); 
-        request.getRequestDispatcher("logado/home.jsp").forward(request, response); 
+        request.getRequestDispatcher("/home.jsp").forward(request, response); 
     }
 }

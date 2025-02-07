@@ -21,16 +21,17 @@ public class LoginCommand implements Command {
 		
 		var authorized = User.authenticate(user, login, senha);
 		
-		String view;
+		//String view;
 		
 		if(authorized) {
 			var session = request.getSession(true);
 			session.setAttribute("user", user);
 			session.setMaxInactiveInterval(24*60*60);
 			
-			response.sendRedirect("logado");
+			return "logado";
+			//response.sendRedirect("LogadoServlet");
 			//view = "user.do?action=logged";
-			return null;
+			//return null;
 		}else {
 			request.setAttribute("msg", "Erro ao fazer login.");
 			return "front.do?action=formUser&login=true";
@@ -38,5 +39,4 @@ public class LoginCommand implements Command {
 		}
 		//return view;
 	}
-
 }
