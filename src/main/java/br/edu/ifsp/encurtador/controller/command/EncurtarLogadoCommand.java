@@ -23,24 +23,29 @@ public class EncurtarLogadoCommand implements Command {
         LinkDao dao = new LinkDaoFactory().factory();
         Link link = dao.retrieve(textLink,user);
 
+        boolean retrieved = false;
         boolean created = false;
 
-        if (link == null) {
+        if (link == null && textCurto.length()>=5) {
         	if(textCurto == null || textCurto.isEmpty()) {
         		link = new Link(textLink);
         	}else {
         		link = new Link(textCurto,textLink);
         	}
             created = dao.create(user, link);
-        } else {
-            created = true;
+        } else if(textCurto.isEmpty() || textCurto.length()>=5) {
+            retrieved = true;
         }
 
 
-        if (created) {
-            request.setAttribute("link", link.getLinkEncurtado()); 
-        } else {
-            request.setAttribute("msg", "Erro ao criar o link curto.");
+        if(created || retrieved) {
+			request.setAttribute("link", link.getLinkEncurtado());
+		} else {
+        	if(textCurto.length()<5) {
+        		request.setAttribute("msg", "O link personalizado deve ter no mínimo 5 caracteres.");
+        	}else {
+        		request.setAttribute("msg", "Erro ao criar o link curto.");
+        	}
         }
         return "logado.do?command=Home"; 
     }
