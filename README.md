@@ -3,8 +3,6 @@ O Encurtador de Links é uma aplicação web que permite a criação e gerenciam
 Com ele, é possível criar links curtos personalizados ou gerados automaticamente, visualizar estatísticas de acesso e gerenciar links de forma simples e segura.
 Este encurtador foi criado como atividade e entrega final para disciplina de Desenvolvimento de Sistemas Web do curso de ADS do IFSP.
 
-========================================================================
-
 # Requisitos Funcionais
 Código	Descrição
 RF01	Cadastro de novos usuários.
@@ -22,8 +20,6 @@ RF12	Exclusão de links curtos.
 RF13	Impedimento de links curtos duplicados.
 RF14	Restrição de acesso a estatísticas e gerenciamento para usuários logados.
 
-========================================================================
-
 # Screenshots
 ## Tela de Cadastro
 ![Tela Cadastro](assets/telas/cadastro.png)
@@ -40,7 +36,6 @@ RF14	Restrição de acesso a estatísticas e gerenciamento para usuários logado
 ## Gerenciamento de Links
 ![Tela Edicao](assets/telas/edicaolinkcurto.png)
 
-========================================================================
 
 # Tecnologias Utilizadas
 Frontend: HTML, CSS, JavaScript, Bootstrap.
@@ -48,9 +43,7 @@ Backend: Java (JSP/Servlets).
 Banco de Dados: MySQL.
 Ferramentas: Maven, Git, Eclipse IDE.
 
-========================================================================
-
 # Contato
 Para dúvidas ou sugestões, entre em contato:
-Nome: Deivid Brito | Email: deivid.brito@aluno.ifsp.edu.br
+Nome: Deivid Brito | Email: deivid.brito@aluno.ifsp.edu.br <br>
 Nome: João Andolpho | Email: joao.andolpho@aluno.ifsp.edu.br
