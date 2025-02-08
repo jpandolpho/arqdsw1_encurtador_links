@@ -1,6 +1,7 @@
 package br.edu.ifsp.encurtador.controller.command;
 
 import java.io.IOException;
+
 import br.edu.ifsp.encurtador.model.dao.LinkDao;
 import br.edu.ifsp.encurtador.model.dao.LinkDaoFactory;
 import br.edu.ifsp.encurtador.model.entity.Link;
@@ -18,12 +19,6 @@ public class EncurtarLogadoCommand implements Command {
         
         String textLink = request.getParameter("textLink");
         String textCurto = request.getParameter("textCurto");
-
-        //acho que não precisa dessa verificação
-//        if (textLink == null || textLink.isEmpty()) {
-//            request.setAttribute("msg", "O link não pode estar vazio.");
-//            return "home.jsp"; //
-//        }
 
         LinkDao dao = new LinkDaoFactory().factory();
         Link link = dao.retrieve(textLink,user);

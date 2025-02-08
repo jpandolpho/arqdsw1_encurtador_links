@@ -17,8 +17,7 @@ public class ListLinksCommand implements Command {
         HttpSession session = request.getSession(false);
 
         User user = (User) session.getAttribute("user");
-        new LinkDaoFactory();
-		LinkDao linkDao = new LinkDaoFactory().factory();
+        LinkDao linkDao = new LinkDaoFactory().factory();
         
         List<Link> links = linkDao.retrieveLinksByUser(user);
         session.setAttribute("links", links);

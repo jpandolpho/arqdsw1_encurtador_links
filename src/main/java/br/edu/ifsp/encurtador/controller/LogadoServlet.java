@@ -9,7 +9,6 @@ import br.edu.ifsp.encurtador.controller.command.EncurtarLogadoCommand;
 import br.edu.ifsp.encurtador.controller.command.HomeLogadoCommand;
 import br.edu.ifsp.encurtador.controller.command.ListLinksCommand;
 import br.edu.ifsp.encurtador.controller.command.LogoutCommand;
-import br.edu.ifsp.encurtador.controller.command.ShowAccessCommand;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -37,8 +36,6 @@ public class LogadoServlet extends HttpServlet {
         
         if ("ListLinks".equals(action)) {
             command = new ListLinksCommand(); 
-        } else if ("ViewStats".equals(action)) {
-            //command = new ViewStatsCommand(); 
         } else if ("Logout".equals(action)) {
             command = new LogoutCommand(); 
         } else if ("EncurtarLink".equals(action)) {
@@ -49,8 +46,6 @@ public class LogadoServlet extends HttpServlet {
             command = new DeleteLinkCommand();
         } else if ("EditLink".equals(action)) {
             command = new EditLinkCommand();
-        } else if ("ShowAccess".equals(action)) {
-            command = new ShowAccessCommand();
         }
         
         String view = command.execute(request, response);
