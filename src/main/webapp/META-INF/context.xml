@@ -11,7 +11,7 @@
 		maxIdle="250"
 		maxWaitMillis="10000"
 		username="root"
-		password="root"
+		password="Deivid10%"
 		driverClassName="com.mysql.cj.jdbc.Driver"
 		url="jdbc:mysql://localhost:3306/shortener_db" />
 </Context>
